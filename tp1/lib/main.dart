@@ -31,7 +31,9 @@ class myApp extends StatelessWidget {
               Spacer(),
               FloatingActionButton(
                 mini: true,
-                onPressed: () {},
+                onPressed: () {
+                  print('Button Pressed');
+                },
                 child: Icon(Icons.add),
               ),
             ],
@@ -39,20 +41,23 @@ class myApp extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.blueAccent,
         ),
-        body: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Hello, World!',
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
-              Text(
-                'Welcome to Flutter development.',
-                style: TextStyle(fontSize: 18),
-              ),
-            ],
+        body: Center(
+          child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.pinkAccent,
+                  child: Text(
+                    '${index + 1}',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                title: Text('Item ${index + 1}'),
+                subtitle: Text('Subtitle for Item ${index + 1}'),
+                trailing: Icon(Icons.arrow_forward_ios, color: Colors.red),
+              );
+            },
           ),
         ),
       ),
