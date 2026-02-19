@@ -45,17 +45,16 @@ class myApp extends StatelessWidget {
           child: ListView.builder(
             itemCount: 5,
             itemBuilder: (context, index) {
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.pinkAccent,
-                  child: Text(
-                    '${index + 1}',
-                    style: TextStyle(color: Colors.white),
+              return Card(
+                child: ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.blueAccent,
+                    child: Text('A', style: TextStyle(color: Colors.white)),
                   ),
+                  title: Text('Item ${index + 1}'),
+                  subtitle: Text('Subtitle for item ${index + 1}'),
+                  trailing: Icon(Icons.arrow_forward_ios, size: 16),
                 ),
-                title: Text('Item ${index + 1}'),
-                subtitle: Text('Subtitle for Item ${index + 1}'),
-                trailing: Icon(Icons.arrow_forward_ios, color: Colors.red),
               );
             },
           ),
