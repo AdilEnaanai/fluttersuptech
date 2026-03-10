@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//https://github.com/AdilEnaanai/fluttersuptech
 void main() {
   runApp(const myApp());
 }
@@ -18,7 +19,10 @@ class myApp extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.account_circle, color: Colors.white),
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: AssetImage('assets/images/maroc.jpg'),
+              ),
               SizedBox(width: 10),
               Text(
                 'TP1',
@@ -48,7 +52,7 @@ class myApp extends StatelessWidget {
               return Card(
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: const Color.fromARGB(255, 172, 63, 9),
                     child: Text('A', style: TextStyle(color: Colors.white)),
                   ),
                   title: Text('Item ${index + 1}'),
