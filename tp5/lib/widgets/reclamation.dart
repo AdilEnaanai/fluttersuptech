@@ -3,9 +3,14 @@ import 'package:tp5/model/Reclamation.dart';
 import 'package:tp5/pages/details.dart';
 
 class ReclamationWidget extends StatelessWidget {
+  final int index;
+  final Function(int index, String newStatus) onStatusChanged;
   final Reclamation reclamation;
-  ReclamationWidget({required this.reclamation});
-
+  ReclamationWidget({
+    required this.reclamation,
+    required this.onStatusChanged,
+    required this.index,
+  });
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,14 +24,17 @@ class ReclamationWidget extends StatelessWidget {
               : TextStyle(color: Colors.orange),
         ),
         leading: CircleAvatar(child: Text(reclamation.id.toString())),
-        onTap: () {
-          Navigator.push(
+        onTap: () async {
+          final newStatus = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) =>
                   Reclamation_details(reclamation: reclamation),
             ),
           );
+          if (newStatus != null) {
+            onStatusChanged(index, newStatus);
+          }
         },
       ),
     );

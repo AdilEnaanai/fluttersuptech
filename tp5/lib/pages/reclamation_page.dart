@@ -39,7 +39,16 @@ class _ReclamationPageState extends State<ReclamationPage> {
       body: ListView.builder(
         itemCount: reclamations.length,
         itemBuilder: (context, index) {
-          return ReclamationWidget(reclamation: reclamations[index]);
+          return ReclamationWidget(
+            index: index,
+            reclamation: reclamations[index],
+            onStatusChanged: (index, newStatus) {
+              setState(() {
+                print(newStatus + "HHHHHHHHHHHH" + index.toString());
+                reclamations[index].status = newStatus;
+              });
+            },
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(

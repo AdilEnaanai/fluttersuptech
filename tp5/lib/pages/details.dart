@@ -27,6 +27,13 @@ class Reclamation_details extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(reclamation.status, style: TextStyle(fontSize: 16)),
+            SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, 'Résolu');
+              },
+              child: Text('Marquer comme résolu'),
+            ),
           ],
         ),
       ),
