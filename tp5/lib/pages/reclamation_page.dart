@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tp5/model/Reclamarion.dart';
+import 'package:tp5/model/Reclamation.dart';
+import 'package:tp5/pages/form_reclamation.dart';
 import 'package:tp5/widgets/reclamation.dart';
 
 class ReclamationPage extends StatefulWidget {
@@ -40,6 +41,22 @@ class _ReclamationPageState extends State<ReclamationPage> {
         itemBuilder: (context, index) {
           return ReclamationWidget(reclamation: reclamations[index]);
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          print("Ouvre formulaire de réclamation");
+          final newReclamation = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => FormReclamation()),
+          );
+
+          if (newReclamation != null) {
+            setState(() {
+              reclamations.add(newReclamation);
+            });
+          }
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

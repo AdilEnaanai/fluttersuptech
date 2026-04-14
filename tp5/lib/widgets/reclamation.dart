@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tp5/model/Reclamarion.dart';
+import 'package:tp5/model/Reclamation.dart';
 import 'package:tp5/pages/details.dart';
 
 class ReclamationWidget extends StatelessWidget {
