@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tp5/model/Reclamation.dart';
 import 'package:tp5/pages/form_reclamation.dart';
+import 'package:tp5/services/reclamation_service.dart';
 import 'package:tp5/widgets/reclamation.dart';
 
 class ReclamationPage extends StatefulWidget {
@@ -11,26 +12,20 @@ class ReclamationPage extends StatefulWidget {
 }
 
 class _ReclamationPageState extends State<ReclamationPage> {
-  List<Reclamation> reclamations = [
-    Reclamation(
-      id: 1,
-      title: 'Problème de connexion',
-      description: 'Je ne peux pas me connecter à mon compte.',
-      status: 'En cours',
-    ),
-    Reclamation(
-      id: 2,
-      title: 'Erreur de paiement',
-      description: 'Mon paiement a été refusé sans raison.',
-      status: 'Résolu',
-    ),
-    Reclamation(
-      id: 3,
-      title: 'Produit défectueux',
-      description: 'Le produit que j\'ai reçu est cassé.',
-      status: 'En cours',
-    ),
-  ];
+  List<Reclamation> reclamations = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadReclamations();
+  }
+
+  Future<void> _loadReclamations() async {
+    final data = await ReclamationService.getReclamations();
+    setState(() {
+      this.reclamations = data;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
