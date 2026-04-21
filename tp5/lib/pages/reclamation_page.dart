@@ -44,8 +44,12 @@ class _ReclamationPageState extends State<ReclamationPage> {
             reclamation: reclamations[index],
             onStatusChanged: (index, newStatus) {
               setState(() {
-                print(newStatus + "HHHHHHHHHHHH" + index.toString());
                 reclamations[index].status = newStatus;
+              });
+            },
+            onReclamationDelete: (index) {
+              setState(() {
+                reclamations.removeAt(index);
               });
             },
           );
