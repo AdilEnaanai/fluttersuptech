@@ -5,14 +5,18 @@ import 'package:tp5/model/Reclamation.dart';
 
 class ReclamationService {
   static const String baseUrl =
-      "https://697ab6680e6ff62c3c59f3ab.mockapi.io/reclamations";
+      "https://69e7917d68208c1debe91858.mockapi.io/Reclamations";
 
-  static Future<List<Reclamation>> getReclamations() async {
-    final response = await http.get(Uri.parse(baseUrl));
-
+  static Future<List<Reclamation>> getReclamations({
+    int page = 1,
+    int limit = 20,
+  }) async {
+    final response = await http.get(
+      Uri.parse(baseUrl + "?page=$page&limit=$limit"),
+    );
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
-      return data.take(10).map((json) => Reclamation.fromJson(json)).toList();
+      return data.map((json) => Reclamation.fromJson(json)).toList();
     } else {
       throw Exception('Erreur de chargement');
     }

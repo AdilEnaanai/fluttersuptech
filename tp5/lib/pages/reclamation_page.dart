@@ -14,16 +14,45 @@ class ReclamationPage extends StatefulWidget {
 class _ReclamationPageState extends State<ReclamationPage> {
   List<Reclamation> reclamations = [];
 
+  ScrollController _scrollController = ScrollController();
+  int currentPage = 1;
+
+  bool isLoadingMore = false;
   @override
   void initState() {
     super.initState();
     _loadReclamations();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _loadMoreReclamations();
+      }
+      ;
+    });
   }
 
   Future<void> _loadReclamations() async {
+    currentPage = 1;
     final data = await ReclamationService.getReclamations();
+
     setState(() {
       this.reclamations = data;
+    });
+  }
+
+  Future<void> _loadMoreReclamations() async {
+    if (isLoadingMore == true) return;
+    currentPage++;
+    isLoadingMore = true;
+    final data = await ReclamationService.getReclamations(
+      page: currentPage,
+      limit: 20,
+    );
+
+    setState(() {
+      this.reclamations.addAll(data);
+      isLoadingMore = false;
     });
   }
 
@@ -32,6 +61,7 @@ class _ReclamationPageState extends State<ReclamationPage> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: ListView.builder(
+        controller: _scrollController,
         itemCount: reclamations.length,
         itemBuilder: (context, index) {
           return ReclamationWidget(
